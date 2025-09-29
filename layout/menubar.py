@@ -1,6 +1,18 @@
 import tkinter as tk
-from tkinter import Menu
-from fungsi import file_ops, histogram, colors
+from tkinter import Menu, Toplevel, Label
+from fungsi import arithmetic_ops, file_ops, histogram, colors, image_processing, filters
+
+
+def show_about(root):
+    about_win = Toplevel(root)
+    about_win.title("Tentang Aplikasi")
+    about_win.geometry("300x150")
+    about_win.resizable(False, False)
+
+    Label(about_win, text="Nama Aplikasi: Image Processing Tool", font=("Arial", 11)).pack(pady=10)
+    Label(about_win, text="Versi: 1.0.0", font=("Arial", 11)).pack(pady=5)
+    Label(about_win, text="Dibuat oleh: Diana", font=("Arial", 11)).pack(pady=5)
+
 
 def create_menubar(root):
     menubar = Menu(root)
@@ -24,5 +36,17 @@ def create_menubar(root):
 
     # === COLORS ===
     colors.build_colors_menu(menubar)
+
+    # === ABOUT ===
+    menubar.add_command(label="Tentang", command=lambda: show_about(root))
+    
+    # === IMAGE PROCESSING ===
+    image_processing.build_image_processing_menu(menubar)
+    
+   # === ARITHMETICAL OPERATION ===
+    arithmetic_ops.build_arithmetic_menu(menubar)
+    
+    # === FILTER ===
+    filters.build_filters_menu(menubar)
 
     return menubar
